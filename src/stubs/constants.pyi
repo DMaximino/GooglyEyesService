@@ -1,0 +1,11 @@
+from _typeshed import Incomplete
+
+FACE_DET_CONFIDENCE_THRESH: float
+ENLARGE_FACE_DET_PERCENTAGE: float
+FACE_DET_INPUT_SIZE: Incomplete
+FACE_DET_MEAN_NORMALIZATION: Incomplete
+FACE_DET_SCALE_FACTOR: float
+directory_path: Incomplete
+FACE_DET_MODEL_PATH_PROTOBUF: Incomplete
+FACE_DET_MODEL_PATH_CAFFE: Incomplete
+LANDMARK_DET_MODEL_PATH: Incomplete

@@ -20,13 +20,13 @@ def make_bbox_larger(coordinates: Tuple[int, int, int, int], percentage: float) 
     Returns: The new bounding box coordinates in the format (xmin, ymin, xmax, ymax).
     """
 
-    xmin, ymin, xmax, ymax = coordinates
+    xmin, ymin, xmax, ymax = [float(i) for i in coordinates]
     width = xmax - xmin
     height = ymax - ymin
-    xmin -= percentage * width
-    xmax += percentage * width
-    ymin -= percentage * height
-    ymax += percentage * height
+    xmin -= percentage * float(width)
+    xmax += percentage * float(width)
+    ymin -= percentage * float(height)
+    ymax += percentage * float(height)
 
     return xmin, ymin, xmax, ymax
 
@@ -43,7 +43,7 @@ def clip_detections(detections: List[Tuple[int, int, int, int]], image_shape) ->
     Returns: The list of detections clipped to the boundary of the image in the same format as the input.
     """
 
-    clipped_detections = []
+    clipped_detections: List[Tuple] = []
     for i in range(len(detections)):
         x, y, w, h = detections[i]
         x_end = x + w
@@ -61,18 +61,18 @@ def clip_detections(detections: List[Tuple[int, int, int, int]], image_shape) ->
             # When clipping x the width of the detection should account for the change
             # The width should be reduced by the distance between x and 0 in order for the x_end to be in the same
             # place as before. Works similarly for the height.
-            clipped_detection[2] += x
+            clipped_detection[2] += int(x)
             w = clipped_detection[2]
         if y < 0:
             clipped_detection[1] = 0
             # When clipping y the height of the detection should account for the change
-            clipped_detection[3] += y
+            clipped_detection[3] += int(y)
             h = clipped_detection[3]
 
         if x + w > img_width:
-            clipped_detection[2] = img_width - x
+            clipped_detection[2] = int(img_width - x)
         if y + h > img_height:
-            clipped_detection[3] = img_height - y
+            clipped_detection[3] = int(img_height - y)
 
         clipped_detections.append(tuple(clipped_detection))
 
@@ -123,13 +123,13 @@ class Googlifier:
 
         if not faces:
             self.logger.info("No faces detected in the image.")
-            return True, image_numpy_array
+            return True, bytes(image_numpy_array)
 
         # Detect eyes in all detected faces
         eyes = self.detect_eyes(image_cv, faces)
         if not eyes:
             self.logger.info("No eyes detected in any detected face.")
-            return True, image_numpy_array
+            return True, bytes(image_numpy_array)
 
         # Draw googly eyes on image
         image_cv = Googlifier.draw_googly_eyes(eyes, image_cv)
@@ -191,8 +191,8 @@ class Googlifier:
             left_eye = cv.boundingRect(landmark[0][36:42])
             right_eye = cv.boundingRect(landmark[0][42:48])
 
-            eyes.append(left_eye)
-            eyes.append(right_eye)
+            eyes.append(tuple(left_eye))
+            eyes.append(tuple(right_eye))
         return eyes
 
     @staticmethod

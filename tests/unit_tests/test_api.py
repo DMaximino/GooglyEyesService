@@ -1,6 +1,7 @@
+from typing import Any
+
 from fastapi.testclient import TestClient
-from starlette.responses import Response
-from src.api.api import app
+from src.api.api import app, ImageBase64
 import base64
 import os
 
@@ -9,7 +10,7 @@ import os
 client = TestClient(app)
 
 
-def call_api_image_base64(filename: str) -> Response:
+def call_api_image_base64(filename: str) -> Any:
     """ Opens image from file with filename as input, converts it to base64 and makes a request to the API.
 
     Args:

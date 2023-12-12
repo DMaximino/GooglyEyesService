@@ -9,7 +9,7 @@ from googlifier import Googlifier
 
 cap = cv.VideoCapture(0, cv.CAP_DSHOW)
 
-if not cap.isOpened:
+if cap.isOpened is not True:
     print('Error opening video capture.')
     exit(0)
 

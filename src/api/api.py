@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Dict, Any, Union
 from fastapi import FastAPI, File, UploadFile, APIRouter, HTTPException
 import io
 
@@ -22,7 +22,7 @@ class ImageBase64(BaseModel):
 
 
 @dev_router.post("/googlify_upload_file/")
-async def googlify_upload_file(file: UploadFile = File(...)) -> Response:
+async def googlify_upload_file(file: UploadFile = File(...)) -> Any:
     """ The endpoint that adds googly eyes to your image.
 
     Args:
@@ -46,8 +46,8 @@ async def googlify_upload_file(file: UploadFile = File(...)) -> Response:
     return StreamingResponse(io.BytesIO(image_with_googly_eyes), media_type="image/png")
 
 
-@prod_router.post("/googlify/")
-async def googlify(image_base64: ImageBase64) -> Dict[str, str]:
+@prod_router.post("/googlify/", response_model=ImageBase64)
+async def googlify(image_base64: ImageBase64) -> Any:
     """ The endpoint that adds googly eyes to your image.
 
     Args:
