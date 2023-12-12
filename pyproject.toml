@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "googly_eyes"
+version = "1"
+description = "A service that makes eyes googly."
+authors = ["Diogo Maximino <diogomaximino@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.104.1"
+python-multipart = "^0.0.6"
+opencv-python-headless = "^4.8.1.78"
+opencv-contrib-python-headless = "^4.8.1.78"
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+gunicorn = "^21.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+locust = "^2.19.1"
+httpx = "^0.25.2"
+coverage = "^7.3.2"
+pytest-mypy = "^0.10.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

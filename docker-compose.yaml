@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  googly_eyes_service:
+    build: .
+    command: sh -c "gunicorn src.api.api:app --workers=${WORKERS} --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000 --timeout=60"
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
