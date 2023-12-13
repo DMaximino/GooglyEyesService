@@ -1,6 +1,7 @@
 import cv2
-import os
-from src.googlifier import Googlifier, make_bbox_larger, clip_detections
+from src.googlifier import Googlifier
+from src.constants import *
+from src.detection_helpers import make_bbox_larger, clip_detections
 
 
 def test_clip_detections():
@@ -21,7 +22,7 @@ def test_make_bbox_larger():
 
 
 def test_detect_faces():
-    googly = Googlifier()
+    googly = Googlifier(CONFIG_FILE_PATH)
 
     # Detect faces in image with faces
     filename = os.getcwd() + "/tests/test_data/people_test_image.jpg"
@@ -41,7 +42,7 @@ def test_detect_faces():
 
 
 def test_detect_eyes():
-    googly = Googlifier()
+    googly = Googlifier(CONFIG_FILE_PATH)
 
     # Detect eyes in faces
     filename = os.getcwd() + "/tests/test_data/people_test_image.jpg"

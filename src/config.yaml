@@ -1,0 +1,15 @@
+---
+face_detector:
+  model_class: src.detectors.face_detector_cv2.FaceDetectorCV2
+  parameters:
+      model_path_protobuf: /models/deploy.prototxt
+      model_path_caffe: /models/res10_300x300_ssd_iter_140000_fp16.caffemodel
+      confidence_thresh: 0.4
+      enlarge_face_percentage: 0.15
+      input_size: (300, 300)
+      mean_normalization: (104.0, 177.0, 123.0)
+      scale_factor: 1.0
+eyes_detector:
+  model_class: src.detectors.eyes_detector_cv2.EyesDetectorCV2
+  parameters:
+      model_path: /models/lbfmodel.yaml

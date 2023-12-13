@@ -1,7 +1,7 @@
 from typing import Any
 
 from fastapi.testclient import TestClient
-from src.api.api import app, ImageBase64
+from src.api.api import app
 import base64
 import os
 

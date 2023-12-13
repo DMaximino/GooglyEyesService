@@ -1,20 +1,21 @@
 import os
-from typing import Dict, Any, Union
-from fastapi import FastAPI, File, UploadFile, APIRouter, HTTPException
 import io
-
-from pydantic import BaseModel
-from starlette.responses import StreamingResponse, Response
-
-from googlifier import Googlifier
 import base64
+from pydantic import BaseModel
+from typing import Dict, Any, Union
+from starlette.responses import StreamingResponse, Response
+from fastapi import FastAPI, File, UploadFile, APIRouter, HTTPException
+
+from constants import *
+from googlifier import Googlifier
+
 
 # Initialize fastapi instance
 app = FastAPI()
 dev_router = APIRouter()
 prod_router = APIRouter()
 
-googlifier = Googlifier()
+googlifier = Googlifier(CONFIG_FILE_PATH)
 
 
 class ImageBase64(BaseModel):

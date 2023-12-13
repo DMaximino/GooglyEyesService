@@ -13,6 +13,7 @@ opencv-python-headless = "^4.8.1.78"
 opencv-contrib-python-headless = "^4.8.1.78"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
 gunicorn = "^21.2.0"
+types-pyyaml = "^6.0.12.12"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -23,7 +24,7 @@ coverage = "^7.3.2"
 pytest-mypy = "^0.10.3"
 
 [tool.mypy]
-mypy_path = "./src/stubs"
+mypy_path = "src/stubs"
 explicit_package_bases = true
 
 [build-system]

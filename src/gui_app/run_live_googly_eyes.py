@@ -6,14 +6,15 @@ import cv2 as cv
 import numpy as np
 
 from googlifier import Googlifier
+from constants import *
 
 cap = cv.VideoCapture(0, cv.CAP_DSHOW)
 
-if cap.isOpened is not True:
+if cap.isOpened is False:
     print('Error opening video capture.')
     exit(0)
 
-googly = Googlifier()
+googly = Googlifier(CONFIG_FILE_PATH)
 
 while True:
     ret, frame = cap.read()

@@ -22,6 +22,8 @@ GooglyEyesService
 - ````src````: Directory with all the code needed for the service. It contains two folders inside: 
   - ````api```` with the main Rest API code including it's endpoints;
   - ````gui_app```` with code to run a simple GUI app to run the "googlifier" in realtime with the webcam input.
+  - ````stubs```` with the .pyi files needed.
+  - ````detectors```` with the classes that wrap around the detection models.
 - ````tests````: Directory with all the code to run tests with two folders inside:
   - ````performance_tests```` with code to run load testing on the service using the library 'locust';
   - ````unit_tests```` with the code to perform the unit tests.
@@ -118,13 +120,17 @@ pytest tests/unit_tests/
 coverage run -m pytest
 coverage report -m -i
 ```
+- In order to check for static type inconsistencies you can use ```mypy```:
+```bash
+mypy src
+```
 
 ## Run performance tests
 
 - (If you haven't yet) Follow the steps in **Run locally** section to setup the environment.
 - Make sure the service is running either locally or with Docker.
 - Run:
-```python
+```bash
 locust -f tests/performance_tests/locust_test.py
 ```
 - Set the Host as http://127.0.0.1:8000 as in the next image:
